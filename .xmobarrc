@@ -1,0 +1,42 @@
+Config { 
+    -- appearence
+    -- font = "-*-Fixed-Bold-R-Normal-*-10-*-*-*-*-*-*-*"
+    font = "xft:Bitstream Vera Sans Mono: size=7:bold:antialias=true"
+    , borderColor = "black"
+    , border = TopB
+    , bgColor = "black"
+    , fgColor = "grey"
+    , position = TopW L 100
+
+    -- general behavior
+    , allDesktops = False
+    , lowerOnStart = True
+    , hideOnStart = False
+
+    -- plugins
+    , commands = [ Run Weather "KDSM" ["-t","<tempC>C <rh>%","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 200
+        , Run MultiCpu ["-L","-1","-H","50","--normal","green","--high","red", "-t", "Cpus: <total0>% <total1>% <total2>% <total3>%"] 10
+        , Run Memory ["-t","Mem: <usedratio>%"] 10
+        , Run Swap [] 10
+        , Run Date "%a %b %_d %H:%M:%S" "date" 10
+        , Run StdinReader
+        , Run DiskIO [("/", "<read> <write>")] [] 10
+        , Run BatteryP ["BAT0"] [
+            "-t", "<acstatus>",
+            "-L", "10", "-H", "80",
+            "-l", "red", "-h", "green",
+            "--", -- battery specific options
+                -- discharging status 
+                "-o", "Batt: <left>%",
+                -- charging status
+                "-O", "<fc=darkred>Charging</fc>", 
+                -- charged status
+                "-i", "<fc=darkgreen>Charged</fc>"
+            ] 10
+    ]
+
+    -- layout
+    , sepChar = "%"
+    , alignSep = "}{"
+    , template = "%StdinReader% | %multicpu% | %memory% * %swap% | %diskio% | %battery% }{ <fc=#ee9a00>%date%</fc> | %KDSM% "
+}
