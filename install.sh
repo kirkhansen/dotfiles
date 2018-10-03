@@ -20,6 +20,6 @@
 set -o nounset                              # Treat unset variables as an error
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-rsync -avzr --exclude 'README.md' --exclude '.git' --include '.*' ${DIR}/ ~/
+rsync -avzr --exclude 'README.md' --exclude '.git' --exclude 'install.sh' --exclude '*.swp' --include '.*' ${DIR}/ ~/
 
-sudo apt install terminator xmonad xmobar dmenu
+sudo apt install terminator xmonad xmobar dmenu xtrlock

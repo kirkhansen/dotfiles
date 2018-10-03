@@ -14,13 +14,32 @@ Config {
     , hideOnStart = False
 
     -- plugins
-    , commands = [ Run Weather "KDSM" ["-t","<tempC>C <rh>%","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 200
-        , Run MultiCpu ["-L","-1","-H","50","--normal","green","--high","red", "-t", "Cpus: <total0>% <total1>% <total2>% <total3>%"] 10
-        , Run Memory ["-t","Mem: <usedratio>%"] 10
+    , commands = [ 
+	  Run Weather "KDSM" [  "-t", "<tempC>C <rh>%"
+			      , "-L", "18"
+ 			      , "-H", "25"
+			      , "-l","lightblue"
+			      , "-n", "green"
+			      , "-h", "red"
+			     ] 200
+        , Run MultiCpu [  "-L", "40"
+			, "-H", "85"
+			, "-l", "green"
+			, "-n", "orange"
+			, "-h", "red"
+			, "-t", "Cpus: <total0>% <total1>% <total2>% <total3>% <total4>% <total5>% <total6>% <total7>%"
+			] 10
+        , Run Memory [ "-t", "Mem: <usedratio>%"
+		     , "-L", "50"
+		     , "-H", "80"
+		     , "--low", "green"
+		     , "--normal", "orange"
+		     , "--high", "red"
+                     ] 10
         , Run Swap [] 10
         , Run Date "%a %b %_d %H:%M:%S" "date" 10
         , Run StdinReader
-        , Run DiskIO [("/", "<read> <write>")] [] 10
+        , Run DiskIO [("/", "r <read> w <write>")] [] 10
         , Run BatteryP ["BAT0"] [
             "-t", "<acstatus>",
             "-L", "10", "-H", "80",
@@ -29,14 +48,21 @@ Config {
                 -- discharging status 
                 "-o", "Batt: <left>%",
                 -- charging status
-                "-O", "<fc=darkred>Charging</fc>", 
+                "-O", "<fc=red>Charging</fc>", 
                 -- charged status
-                "-i", "<fc=darkgreen>Charged</fc>"
+                "-i", "<fc=green>Charged</fc>"
             ] 10
+	, Run DynNetwork [ "-t", "<dev>: <tx>kB/s|<rx>kB/s"
+                         , "-L", "1000"       -- units: B/s
+                         , "-H", "5000"       -- units: B/s
+                         , "-l", "green"
+                         , "-n", "orange"
+                         , "-h", "red"
+                         ] 10
     ]
 
     -- layout
     , sepChar = "%"
     , alignSep = "}{"
-    , template = "%StdinReader% | %multicpu% | %memory% * %swap% | %diskio% | %battery% }{ <fc=#ee9a00>%date%</fc> | %KDSM% "
+    , template = "%StdinReader% | %multicpu% | %memory% * %swap% | %diskio% | %battery% | %dynnetwork% }{ <fc=#ee9a00>%date%</fc> | %KDSM% "
 }
