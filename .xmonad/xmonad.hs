@@ -29,6 +29,7 @@ myFocusedBorderColor = "#cd8b00"
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
         [ ((modMask .|. controlMask, xK_l), spawn "xtrlock -b")
           , ((modMask, xK_s), spawn "systemctl suspend")
+          , ((modMask .|. controlMask, xK_h), spawn "xtrlock -b -f && systemctl suspend")
           , ((0, xK_F1), spawn "screen-refresh && monitor-setup single")
           , ((0, xK_F2), spawn "screen-refresh && monitor-setup double")
           , ((0, xK_F3), spawn "screen-refresh && monitor-setup triple")
