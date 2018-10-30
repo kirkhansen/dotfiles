@@ -1,0 +1,162 @@
+execute pathogen#infect()
+let mapleader=","           "Changes Leader key into a comma instead of a backslash
+set nocompatible            "Prefents VIM from being nerfed into acting like VI
+set viminfo='1000,f1,:1000,/1000
+set history=500
+
+au FileType php set omnifunc=phpcomplete#CompletePHP
+
+"------  Visual Options  ------
+set guioptions=egmt         "remove toolbar, scrollbars
+syntax on                   "Enables syntax highlighting
+syntax enable               " Turn on syntax highlights
+
+set nu                      "Enable Line Numbers
+nnoremap <F4> :set nonumber!<cr>
+set nowrap                  "Disable word wrap
+"set vb                      "Visual bell instead of beeps
+set ruler                   "Displays cursor position on bottom right of screen
+
+" Set the status line
+set laststatus=2
+" Broken down into easily includeable segments
+set statusline=%<%f\    " Filename
+set statusline+=%w%h%m%r " Options
+set statusline+=%{fugitive#statusline()} "  Git Hotness
+set statusline+=\ [%{&ff}/%Y]            " filetype
+set statusline+=\ [%{getcwd()}]          " current dir
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+
+let g:buftabs_only_basename=1
+let g:buftabs_marker_modified = "+"
+" Map <F5> to turn spelling on (VIM 7.0+)
+map <F5> :setlocal spell! spelllang=en_us<cr>
+
+" Map <F6> to undo tree
+map <F6> :UndotreeToggle<cr>
+" kind of like vim's swap. let's not clutter our cwd with the undo tree stuffs
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
+
+
+"------  Behavior  ------
+set expandtab               "Use spaces instead of tabs
+set softtabstop=4               "tab = 4 spaces
+set shiftwidth=4            "Indent to four spaces
+set hidden                  "Switch between unsaved buffers w/o needing to save, preserves history
+filetype indent on          "Syntax Highlight
+filetype plugin on          "Needed for snipMate
+set autoindent              "Autoindent
+
+"Ignore these files when completing names
+set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,node_modules/*
+
+"------ Special Case Highlighting -------
+au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.less set filetype=css
+
+"------  Searching  ------
+set incsearch               "Search while typing
+set smartcase               "Lowercase = case insensitive, any uppercase = case sensitive
+set hlsearch                "Highlight all search results
+"Following line clears the search highlights when pressing Lb
+nnoremap <leader>b :nohlsearch<CR>
+" http://www.vim.org/scripts/script.php?script_id=2572
+noremap <leader>a :Ack 
+noremap <leader>A <C-w>j<C-w>c<C-w>l
+let g:ackprg="ack -H --nocolor --nogroup --column --type-add php=.tpl"
+
+"------  Replacing ------
+"type S, then type what you're looking for, a /, and what to replace it with
+nmap S :%s//g<LEFT><LEFT>
+vmap S :s//g<LEFT><LEFT>
+
+"------  Buffers  ------
+" Ctrl Left & Right move between buffers
+noremap <silent> <C-left> :bprev<CR>
+noremap <silent> <C-h> :bprev<CR>
+noremap <silent> <C-right> :bnext<CR>
+noremap <silent> <C-l> :bnext<CR>
+" Tab and Shift tab as well.
+noremap <Tab> :bnext<CR>
+noremap <S-Tab> :bprevious<CR>
+" Closes the current buffer
+nnoremap <silent> <Leader>q :Bclose<CR>
+
+"---- Splits -----
+nnoremap <leader>j <C-W><C-J>
+nnoremap <leader>k <C-W><C-K>
+nnoremap <leader>l <C-W><C-L>
+nnoremap <leader>h <C-W><C-H>
+
+"---- Tab nav ---"
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+"nnoremap th :tabnext<CR>
+"nnoremap tl :tabprev<CR>
+"nnoremap tn :tabnew<CR>
+
+if filereadable($HOME.'/.vimrc_local')
+    source $HOME/.vimrc_local
+endif
+
+" Prevent * from moving forward to second match on first search.
+noremap * *``
+
+if exists('+colorcolumn')
+    execute "set colorcolumn=" .join(range(120,335),',')
+    highlight ColorColumn ctermbg=DarkGray
+endif
+
+" Use system clipboard"
+set clipboard+=unnamedplus
+
+" No search highlighting
+set nohlsearch
+
+" Rebind nerdtree toggle.
+map <C-n> :NERDTreeToggle<CR>
+" Bind nerdtree tabs toggle
+map <Leader>n :NERDTreeTabsToggle<CR>
+"Hide .pyc in nerdtree.
+let NERDTreeIgnore=['\.pyc$', '\~$']
+" Change some nerdtree deaults
+let g:nerdtree_tabs_open_on_console_startup = 0
+
+" Close vim if nerdtree is all that's left
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Don't open nerdtree if git invoked it
+autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | wincmd p | endif
+
+
+" python-mode
+let g:pymode_folding = 0
+" Disable pymodes colorcolumn, as we're defining our own
+let g:pymode_options_colorcolumn = 0
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! %!sudo tee > /dev/null %
+
+" markdown
+" let g:vim_markdown_folding_disabled = 1
+
+"latex
+let g:tex_flavor='latex'
