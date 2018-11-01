@@ -7,6 +7,7 @@ set history=500
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
 "------  Visual Options  ------
+colorscheme alduin
 set guioptions=egmt         "remove toolbar, scrollbars
 syntax on                   "Enables syntax highlighting
 syntax enable               " Turn on syntax highlights
@@ -141,7 +142,8 @@ let NERDTreeIgnore=['\.pyc$', '\~$']
 let g:nerdtree_tabs_open_on_console_startup = 0
 
 " Close vim if nerdtree is all that's left
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Don't open nerdtree if git invoked it
 autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | wincmd p | endif

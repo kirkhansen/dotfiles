@@ -5,11 +5,11 @@ triple ()
 
 double ()
 {
-    xrandr --auto --output eDP-1 --on --left-of HDMI-1 --primary
+    xrandr --auto --output eDP-1 --left-of DP-2-1 --primary
 } 
 
 single ()
 {
-    xrandr --auto --output eDP-1 --on --primary
+    xrandr --auto --output eDP-1 --primary
 }
 
