@@ -20,6 +20,13 @@
 set -o nounset                              # Treat unset variables as an error
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-rsync -avzr --exclude 'README.md' --exclude '.git' --exclude 'install.sh' --exclude '*.swp' --include '.*' ${DIR}/ ~/
+rsync -avzr \
+    --exclude 'README.md' --exclude '.git' --exclude 'install.sh' --exclude '*.swp' --exclude '*.txt' \
+    --include '.*' \
+    ${DIR}/ ~/
 
-sudo apt install terminator xmonad xmobar dmenu xtrlock
+sudo apt install terminator xmonad xmobar dmenu xtrlock git
+
+while read repo; do
+    git -C ~/.vim/bundle/ clone "$repo"
+done < vim-packages.txt
