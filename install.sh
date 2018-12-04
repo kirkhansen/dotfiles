@@ -25,7 +25,7 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt install terminator xmonad xmobar dmenu xtrlock git
+sudo apt install terminator xmonad xmobar dmenu xtrlock git shellcheck
 
 while read repo; do
     git -C ~/.vim/bundle/ clone "$repo"
