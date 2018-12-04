@@ -52,7 +52,8 @@ endif
 
 "------  Behavior  ------
 set expandtab               "Use spaces instead of tabs
-set softtabstop=4               "tab = 4 spaces
+set tabstop=8               "width of a hard tabstop measured in spaces"
+set softtabstop=4           "tab = 4 spaces
 set shiftwidth=4            "Indent to four spaces
 set hidden                  "Switch between unsaved buffers w/o needing to save, preserves history
 filetype indent on          "Syntax Highlight
