@@ -30,3 +30,5 @@ sudo apt install terminator xmonad xmobar dmenu xtrlock git shellcheck
 while read repo; do
     git -C ~/.vim/bundle/ clone "$repo"
 done < vim-packages.txt
+
+git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1

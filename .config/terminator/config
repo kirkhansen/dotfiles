@@ -22,7 +22,6 @@
     show_titlebar = False
     urgent_bell = True
     use_system_font = False
-    visible_bell = True
   [[Dracula]]
     background_color = "#1e1f29"
     cursor_color = "#bbbbbb"

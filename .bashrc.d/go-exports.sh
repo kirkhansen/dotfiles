@@ -20,4 +20,6 @@
 export GOPATH=${HOME}/.go/
 export PATH=${PATH}:/usr/local/go/bin:${GOPATH}/bin
 
-eval "$(jira --completion-script-bash)"
+if [ -x "$(command -v jira)" ]; then
+    eval "$(jira --completion-script-bash)"
+fi

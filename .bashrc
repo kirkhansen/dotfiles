@@ -4,7 +4,7 @@ source <(cat ~/.bashrc.d/*)
 export EDITOR=vim
 
 source /etc/bash_completion
-# Uncomment once we figure out mfa for jump...
+export GIT_PROMPT_ONLY_IN_REPO=1
 source ~/.bash-git-prompt/gitprompt.sh
 source ~/.dredge/autocomplete
 
