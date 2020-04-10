@@ -25,10 +25,19 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt install terminator xmonad xmobar dmenu xtrlock git shellcheck
+sudo apt install xmonad xmobar dmenu git shellcheck fish
 
 while read repo; do
     git -C ~/.vim/bundle/ clone "$repo"
 done < vim-packages.txt
 
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+
+# install i3lock-fancy
+git clone https://github.com/meskarune/i3lock-fancy.git
+cd i3lock-fancy
+sudo make install
+
+# install alacritty terminal
+wget https://github.com/alacritty/alacritty/releases/download/v0.4.2/Alacritty-v0.4.2-ubuntu_18_04_amd64.deb -O ~/build/alacritty.deb
+sudo apt install ~/build/alacritty.deb

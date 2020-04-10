@@ -17,7 +17,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-alias weather='curl http://wttr.in/~Indianola,IA'
+alias weather='curl http://wttr.in/~Grimes,IA'
 alias py-cleanup="find . -name '*.pyc' -delete"
 
 alias pbcopy="xclip -selection clipboard"

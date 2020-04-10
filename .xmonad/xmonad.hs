@@ -11,8 +11,7 @@ import System.IO
 import qualified Data.Map as M
 
 
---myTerminal = "urxvt256c-ml" -- Solarized terminal
-myTerminal = "terminator"
+myTerminal = "alacritty"
 
 -- The default number of workspaces (virtual screens) and their names.
 -- -- By default we use numeric strings, but any string may be used as a
@@ -23,13 +22,13 @@ myTerminal = "terminator"
 -- --
 -- -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 -- --
-myWorkspaces = ["code", "database", "mail", "web"] ++ map show [5..10]
+myWorkspaces = ["code", "database", "chat", "web"] ++ map show [5..10]
 myNormalBorderColor  = "#cccccc"
 myFocusedBorderColor = "#cd8b00"
 myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-        [ ((modMask .|. controlMask, xK_l), spawn "xtrlock -b")
+        [ ((modMask .|. controlMask, xK_l), spawn "i3lock-fancy")
           , ((modMask, xK_s), spawn "systemctl suspend")
-          , ((modMask .|. controlMask, xK_h), spawn "xtrlock -b -f && systemctl suspend")
+          , ((modMask .|. controlMask, xK_h), spawn "i3lock-fancy && systemctl suspend")
           , ((0, xK_F1), spawn "screen-refresh && monitor-setup single")
           , ((0, xK_F2), spawn "screen-refresh && monitor-setup double")
           , ((0, xK_F3), spawn "screen-refresh && monitor-setup triple")
