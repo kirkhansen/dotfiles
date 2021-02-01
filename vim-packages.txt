@@ -5,4 +5,4 @@ git@github.com:tpope/vim-surround.git
 git@github.com:tpope/vim-vinegar.git
 git@github.com:vim-airline/vim-airline.git
 git@github.com:joshdick/onedark.vim.git
-git@github.com:pyenv/vim-pyenv.git
+git@github.com:lambdalisue/vim-pyenv.git
