@@ -1,18 +1,18 @@
-#!/bin/bash - 
+#!/bin/bash -
 #===============================================================================
 #
 #          FILE: install.sh
-# 
-#         USAGE: ./install.sh 
-# 
+#
+#         USAGE: ./install.sh
+#
 #   DESCRIPTION: Copies files to users home, and attempts to install some packages
-# 
+#
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: YOUR NAME (), 
-#  ORGANIZATION: 
+#        AUTHOR: YOUR NAME (),
+#  ORGANIZATION:
 #       CREATED: 09/17/2018 13:36
 #      REVISION:  ---
 #===============================================================================
@@ -27,6 +27,7 @@ rsync -avzr \
 
 sudo apt install xmonad xmobar dmenu git shellcheck fish
 
+# install vim packages
 while read repo; do
     git -C ~/.vim/bundle/ clone "$repo"
 done < vim-packages.txt

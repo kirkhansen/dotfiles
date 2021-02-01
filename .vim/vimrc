@@ -7,7 +7,10 @@ set history=500
 au FileType php set omnifunc=phpcomplete#CompletePHP
 
 "------  Visual Options  ------
-colorscheme alduin
+"colorscheme darcula
+"colorscheme solarized
+colorscheme onedark
+set background=dark
 set guioptions=egmt         "remove toolbar, scrollbars
 syntax on                   "Enables syntax highlighting
 syntax enable               " Turn on syntax highlights
@@ -27,14 +30,13 @@ set statusline+=%{fugitive#statusline()} "  Git Hotness
 set statusline+=\ [%{&ff}/%Y]            " filetype
 set statusline+=\ [%{getcwd()}]          " current dir
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 let g:syntastic_enable_signs=1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 
 let g:buftabs_only_basename=1
 let g:buftabs_marker_modified = "+"
@@ -74,7 +76,7 @@ set hlsearch                "Highlight all search results
 "Following line clears the search highlights when pressing Lb
 nnoremap <leader>b :nohlsearch<CR>
 " http://www.vim.org/scripts/script.php?script_id=2572
-noremap <leader>a :Ack 
+noremap <leader>a :Ack
 noremap <leader>A <C-w>j<C-w>c<C-w>l
 let g:ackprg="ack -H --nocolor --nogroup --column --type-add php=.tpl"
 
@@ -133,23 +135,6 @@ set clipboard+=unnamedplus
 " No search highlighting
 set nohlsearch
 
-" Rebind nerdtree toggle.
-map <C-n> :NERDTreeToggle<CR>
-" Bind nerdtree tabs toggle
-map <Leader>n :NERDTreeTabsToggle<CR>
-"Hide .pyc in nerdtree.
-let NERDTreeIgnore=['\.pyc$', '\~$']
-" Change some nerdtree deaults
-let g:nerdtree_tabs_open_on_console_startup = 0
-
-" Close vim if nerdtree is all that's left
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" Don't open nerdtree if git invoked it
-autocmd VimEnter * if &filetype !=# 'gitcommit' | NERDTree | wincmd p | endif
-
-
 " python-mode
 let g:pymode_folding = 0
 " Disable pymodes colorcolumn, as we're defining our own
@@ -163,3 +148,16 @@ cmap w!! %!sudo tee > /dev/null %
 
 "latex
 let g:tex_flavor='latex'
+
+"use ag instead of ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+"black config
+let g:black_skip_string_normalization = 1
+let g:black_linelength = 100
+
+" strip trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" add  powerline fonts to airline
+ let g:airline_powerline_fonts = 1
