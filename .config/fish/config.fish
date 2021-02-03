@@ -9,6 +9,9 @@ fish_vi_key_bindings
 bind -M insert \cf accept-autosuggestion
 
 # Enable pyenv
+set PYENV_ROOT $HOME/.pyenv
+set -x PATH $PYENV_ROOT/bin $PATH
+set -x VIRTUAL_ENV_DISABLE_PROMPT 0
 status --is-interactive; and pyenv init - | source
 status --is-interactive; and pyenv virtualenv-init - | source
 
@@ -29,3 +32,4 @@ alias pc="proxychains4"
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.fish ]; and . ~/.config/tabtab/__tabtab.fish; or true
+
