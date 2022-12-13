@@ -28,6 +28,7 @@ rsync -avzr \
 sudo apt install xmonad xmobar dmenu git shellcheck fish
 
 # install vim packages
+mkdir -p ~/.vim/bundle
 while read repo; do
     git -C ~/.vim/bundle/ clone "$repo"
 done < vim-packages.txt
@@ -40,8 +41,8 @@ cd i3lock-fancy
 sudo make install
 
 # install alacritty terminal
-wget https://github.com/alacritty/alacritty/releases/download/v0.4.2/Alacritty-v0.4.2-ubuntu_18_04_amd64.deb -O ~/build/alacritty.deb
-sudo apt install ~/build/alacritty.deb
+# wget https://github.com/alacritty/alacritty/releases/download/v0.4.2/Alacritty-v0.4.2-ubuntu_18_04_amd64.deb -O ~/build/alacritty.deb
+# sudo apt install ~/build/alacritty.deb
 
 # install pyenv
 curl https://pyenv.run | bash

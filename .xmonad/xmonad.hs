@@ -11,7 +11,7 @@ import System.IO
 import qualified Data.Map as M
 
 
-myTerminal = "alacritty"
+myTerminal = "kitty"
 
 -- The default number of workspaces (virtual screens) and their names.
 -- -- By default we use numeric strings, but any string may be used as a
