@@ -27,12 +27,6 @@ rsync -avzr \
 
 sudo apt install xmonad xmobar dmenu git shellcheck fish kitty
 
-# install vim packages
-mkdir -p ~/.vim/bundle
-while read repo; do
-    git -C ~/.vim/bundle/ clone "$repo"
-done < vim-packages.txt
-
 git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
 
 # install i3lock-fancy
@@ -42,3 +36,11 @@ sudo make install
 
 # install pyenv
 curl https://pyenv.run | bash
+
+# coc.nvim stuff
+# install nodejs
+curl -sL install-node.vercel.app/lts | sudo bash
+# vim plug is nice, moving to it methinks
+curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -p ~/.config/nvim/
+ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
