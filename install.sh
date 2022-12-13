@@ -25,7 +25,7 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt install xmonad xmobar dmenu git shellcheck fish
+sudo apt install xmonad xmobar dmenu git shellcheck fish kitty
 
 # install vim packages
 mkdir -p ~/.vim/bundle
@@ -39,10 +39,6 @@ git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt -
 git clone https://github.com/meskarune/i3lock-fancy.git
 cd i3lock-fancy
 sudo make install
-
-# install alacritty terminal
-# wget https://github.com/alacritty/alacritty/releases/download/v0.4.2/Alacritty-v0.4.2-ubuntu_18_04_amd64.deb -O ~/build/alacritty.deb
-# sudo apt install ~/build/alacritty.deb
 
 # install pyenv
 curl https://pyenv.run | bash
