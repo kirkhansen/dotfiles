@@ -1,4 +1,26 @@
-execute pathogen#infect()
+" execute pathogen#infect()
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+" The default plugin directory will be as follows:
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
+
+" Make sure you use single quotes
+
+" Project drawers
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-fugitive'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-airline/vim-airline'
+
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+
+" You can revert the settings after the call like so:
+"   filetype indent off   " Disable file-type-specific indentation
+"   syntax off            " Disable syntax highlighting
 let mapleader=","           "Changes Leader key into a comma instead of a backslash
 set nocompatible            "Prefents VIM from being nerfed into acting like VI
 set viminfo='1000,f1,:1000,/1000
@@ -9,7 +31,7 @@ au FileType php set omnifunc=phpcomplete#CompletePHP
 "------  Visual Options  ------
 "colorscheme darcula
 "colorscheme solarized
-colorscheme onedark
+"colorscheme onedark
 set background=dark
 set guioptions=egmt         "remove toolbar, scrollbars
 syntax on                   "Enables syntax highlighting
@@ -125,11 +147,6 @@ endif
 " Prevent * from moving forward to second match on first search.
 noremap * *``
 
-if exists('+colorcolumn')
-    execute "set colorcolumn=" .join(range(120,335),',')
-    highlight ColorColumn ctermbg=DarkGray
-endif
-
 " Use system clipboard"
 set clipboard+=unnamedplus
 
@@ -162,3 +179,24 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " add  powerline fonts to airline
  let g:airline_powerline_fonts = 1
+
+ " ignore warning from coc about older nvim
+ let g:coc_disable_startup_warning = 1
+
+
+ " use <tab> to trigger completion and navigate to the next complete item
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)

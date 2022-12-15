@@ -1,21 +1,4 @@
 #!/bin/bash -
-#===============================================================================
-#
-#          FILE: install.sh
-#
-#         USAGE: ./install.sh
-#
-#   DESCRIPTION: Copies files to users home, and attempts to install some packages
-#
-#       OPTIONS: ---
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: YOUR NAME (),
-#  ORGANIZATION:
-#       CREATED: 09/17/2018 13:36
-#      REVISION:  ---
-#===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
@@ -25,23 +8,20 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt install xmonad xmobar dmenu git shellcheck fish fzf fd-find
-
-# install vim packages
-while read repo; do
-    git -C ~/.vim/bundle/ clone "$repo"
-done < vim-packages.txt
-
-git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+sudo apt-get install -y xmonad xmobar dmenu git shellcheck fish fzf fd-find kitty
 
 # install i3lock-fancy
 git clone https://github.com/meskarune/i3lock-fancy.git
 cd i3lock-fancy
 sudo make install
 
-# install alacritty terminal
-wget https://github.com/alacritty/alacritty/releases/download/v0.4.2/Alacritty-v0.4.2-ubuntu_18_04_amd64.deb -O ~/build/alacritty.deb
-sudo apt install ~/build/alacritty.deb
-
 # install pyenv
 curl https://pyenv.run | bash
+
+# coc.nvim stuff
+# install nodejs
+curl -sL install-node.vercel.app/lts | sudo bash
+# vim plug is nice, moving to it methinks
+curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -p ~/.config/nvim/
+ln -s ~/.vim/vimrc ~/.config/nvim/init.vim
