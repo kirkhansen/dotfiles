@@ -8,7 +8,7 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt-get install -y xmonad xmobar dmenu git shellcheck fish fzf fd-find kitty
+sudo apt-get install -y xmonad xmobar dmenu git shellcheck fish fzf fd-find kitty nvim
 
 # install i3lock-fancy
 git clone https://github.com/meskarune/i3lock-fancy.git
@@ -17,6 +17,16 @@ sudo make install
 
 # install pyenv
 curl https://pyenv.run | bash
+
+# Install Nvim
+mkdir -p ~/build
+pushd ~/build
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.deb
+sudo apt install ./nvim-linux64.deb
+popd
+
+sudo update-alternatives --install /usr/bin/editor editor /usr/local/bin/nvim 100
+sudo update-alternatives --set editor /usr/local/bin/vim
 
 # coc.nvim stuff
 # install nodejs
