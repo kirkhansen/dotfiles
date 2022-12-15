@@ -25,7 +25,7 @@ rsync -avzr \
     --include '.*' \
     ${DIR}/ ~/
 
-sudo apt install xmonad xmobar dmenu git shellcheck fish
+sudo apt install xmonad xmobar dmenu git shellcheck fish fzf fd-find
 
 # install vim packages
 while read repo; do

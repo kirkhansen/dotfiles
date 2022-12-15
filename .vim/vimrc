@@ -68,6 +68,7 @@ set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.
 "------ Special Case Highlighting -------
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.less set filetype=css
+au BufRead /tmp/psql.edit.* set syntax=sql
 
 "------  Searching  ------
 set incsearch               "Search while typing
